@@ -1,12 +1,23 @@
 {
   "name": "generator-modern-react",
   "version": "0.1.0",
-  "description": "",
+  "description": "Opinionated scaffolding tool that enhances React file creation, promoting modern standards and aiding in project structure.",
+  "homepage": "https://github.com/Rafael-Martins/generator-modern-react",
+  "license": "MIT",
   "files": [
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "react-generator",
+    "yeoman",
+    "react",
+    "generator",
+    "file",
+    "creation",
+    "automation",
+    "scaffolding",
+    "boilerplate"
   ],
   "dependencies": {
     "yeoman-generator": "^1.0.0"
