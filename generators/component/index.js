@@ -30,7 +30,7 @@ module.exports = class extends Generator {
     const componentName =
       capitalize(this.options.componentName) || "MyComponent";
     const componentPath = `src/components/${componentName}`;
-    const componentExtension = this.options.ts ? "tsx" : "js";
+    const componentExtension = this.options.ts ? "tsx" : "jsx";
     const indexExtension = this.options.ts ? "ts" : "js";
     const importCss = !this.options.emotion && !this.options.nostyle;
     const { emotion } = this.options;

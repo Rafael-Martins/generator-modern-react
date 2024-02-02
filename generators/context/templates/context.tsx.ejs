@@ -1,0 +1,24 @@
+import React, { createContext, ReactNode } from "react";
+
+export interface <%= contextName %>ContextProps {
+
+}
+interface <%= contextName %>ProviderProps {
+  children: ReactNode;
+}
+
+const <%= contextName %>Context = createContext<<%= contextName %>ContextProps | null>(null);
+
+const <%= contextName %>Provider: React.FC<<%= contextName %>ProviderProps> = ({ children }) => {
+  const contextValue: <%= contextName %>ContextProps = {
+
+  };
+
+  return (
+    <<%= contextName %>Context.Provider value={contextValue}>
+      {children}
+    </<%= contextName %>Context.Provider>
+  );
+};
+
+export { <%= contextName %>Context, <%= contextName %>Provider };
