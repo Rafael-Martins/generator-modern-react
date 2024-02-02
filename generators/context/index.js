@@ -1,4 +1,5 @@
 const Generator = require("yeoman-generator");
+const { capitalize } = require("../../utils");
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -13,7 +14,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const contextName = this.options.contextName || "myContext";
+    const contextName = capitalize(this.options.contextName) || "myContext";
     const extension = this.options.ts ? "tsx" : "jsx";
     const contextPath = "src/context";
 
