@@ -12,6 +12,18 @@ module.exports = class extends Generator {
       type: Boolean,
       default: false,
     });
+
+    this.option("emotion", {
+      desc: "Generate project with Emotion styles",
+      type: Boolean,
+      default: false,
+    });
+
+    this.option("nostyle", {
+      desc: "Generate project with no styles",
+      type: Boolean,
+      default: false,
+    });
   }
 
   writing() {
@@ -20,18 +32,27 @@ module.exports = class extends Generator {
     const componentPath = `src/components/${componentName}`;
     const componentExtension = this.options.ts ? "tsx" : "js";
     const indexExtension = this.options.ts ? "ts" : "js";
+    const importCss = !this.options.emotion && !this.options.nostyle;
+    const { emotion } = this.options;
+
     this.fs.copyTpl(
-      this.templatePath(`Component.${componentExtension}`),
+      this.templatePath(`Component.${componentExtension}.ejs`),
       this.destinationPath(
         `${componentPath}/${componentName}.${componentExtension}`
       ),
-      { componentName: componentName }
+      { componentName, importCss, emotion }
     );
 
     this.fs.copyTpl(
-      this.templatePath(`index.js`),
+      this.templatePath(`index.ejs`),
       this.destinationPath(`${componentPath}/index.${indexExtension}`),
-      { componentName: componentName }
+      { componentName }
     );
+
+    importCss &&
+      this.fs.copyTpl(
+        this.templatePath(`style.css.ejs`),
+        this.destinationPath(`${componentPath}/style.css`)
+      );
   }
 };
