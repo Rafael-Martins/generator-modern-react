@@ -14,13 +14,19 @@ module.exports = class extends Generator {
     });
 
     this.option("emotion", {
-      desc: "Generate project with Emotion styles",
+      desc: "Generate project with Emotion style",
       type: Boolean,
       default: false,
     });
 
     this.option("nostyle", {
-      desc: "Generate project with no styles",
+      desc: "Generate project with no style",
+      type: Boolean,
+      default: false,
+    });
+
+    this.option("notest", {
+      desc: "Generate project with no test",
       type: Boolean,
       default: false,
     });
@@ -33,6 +39,7 @@ module.exports = class extends Generator {
     const componentExtension = this.options.ts ? "tsx" : "jsx";
     const indexExtension = this.options.ts ? "ts" : "js";
     const importCss = !this.options.emotion && !this.options.nostyle;
+    const createTest = !this.options.notest;
     const { emotion } = this.options;
 
     this.fs.copyTpl(
@@ -53,6 +60,15 @@ module.exports = class extends Generator {
       this.fs.copyTpl(
         this.templatePath(`style.css.ejs`),
         this.destinationPath(`${componentPath}/style.css`)
+      );
+
+    createTest &&
+      this.fs.copyTpl(
+        this.templatePath("test.ejs"),
+        this.destinationPath(
+          `src/components/${componentName}/${componentName}.test.${componentExtension}`
+        ),
+        { componentName }
       );
   }
 };
